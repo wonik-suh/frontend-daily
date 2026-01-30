@@ -1,0 +1,7 @@
+## Day 3
+
+- Added a button and basic click interaction
+- Learned that JavaScript needs to run after HTML elements exist
+- Fixed an issue by moving the script to the bottom of the body
+
+Feeling: Clicking a button and seeing something change felt good. Now I get what “frontend interaction” means.
