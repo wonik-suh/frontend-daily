@@ -7,21 +7,33 @@
 
   <body>
     <h1>Study Dashboard</h1>
-    <button>Click me</button>
-    <p>Count: 0</p>
+
+    <p id="status">Not studied yet</p>
+    <button id="studyBtn">Start Study</button>
 
     
     <p>This app helps me track my daily study habits.</p>
     
     <!-- This might become the main dashboard -->
     <script>
-      const button = document.querySelector("button");
-      const text = document.querySelector("p");
-      let count = 0;
-      button.addEventListener("click", () => {
-        count = count + 1;
-        text.textContent = "Count: " + count;
-      });
-      </script>
+    const button = document.querySelector("#studyBtn");
+    const statusText = document.querySelector("#status");
+
+    let studiedToday = false;
+
+    button.addEventListener("click", () => {
+      studiedToday = !studiedToday;
+
+      if (studiedToday) {
+        statusText.textContent = "Studied today ✅";
+        button.textContent = "Cancel";
+        } else {
+        statusText.textContent = "Not studied yet";
+        button.textContent = "Start Study";
+        }
+    });
+      
+    </script>
+
   </body>
 </html>
