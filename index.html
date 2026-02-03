@@ -9,8 +9,9 @@
     <h1>Study Dashboard</h1>
 
     <p id="status">Not studied yet</p>
-    <button id="studyBtn">Start Study</button>
+    <p id="count">Study count: 0</p>
 
+    <button id="studyBtn">Start Study</button>
     
     <p>This app helps me track my daily study habits.</p>
     
@@ -18,22 +19,26 @@
     <script>
     const button = document.querySelector("#studyBtn");
     const statusText = document.querySelector("#status");
+    const countText = document.querySelector("#count");
 
     let studiedToday = false;
+    let studyCount = 0;
 
     button.addEventListener("click", () => {
-      studiedToday = !studiedToday;
+      if (!studiedToday) {
+        studiedToday = true;
+        studyCount = studyCount + 1;
 
-      if (studiedToday) {
         statusText.textContent = "Studied today ✅";
+        countText.textContent = "Study count: " + studyCount;
         button.textContent = "Cancel";
-        } else {
-        statusText.textContent = "Not studied yet";
-        button.textContent = "Start Study";
-        }
-    });
-      
-    </script>
+      } else {
+      studiedToday = false;
 
+      statusText.textContent = "Not studied yet";
+      button.textContent = "Start Study";
+      }
+      });
+    </script>
   </body>
 </html>
