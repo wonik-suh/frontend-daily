@@ -20,11 +20,21 @@
     const button = document.querySelector("#studyBtn");
     const statusText = document.querySelector("#status");
     const countText = document.querySelector("#count");
-    const savedStudied = localStorage.getItem("studiedToday");
-    const savedCount = localStorage.getItem("studyCount");
 
     let studiedToday = false;
     let studyCount = 0;
+
+    function renderUI() {
+      statusText.textContent = studiedToday
+        ? "Studied today ✅"
+        : "Not studied yet";
+
+      countText.textContent = "Study count: " + studyCount;
+      button.textContent = studiedToday ? "Cancel" : "Start Study";
+    }
+
+    const savedStudied = localStorage.getItem("studiedToday");
+    const savedCount = localStorage.getItem("studyCount");
 
     if (savedStudied !== null) {
       studiedToday = savedStudied === "true";
@@ -34,27 +44,20 @@
       studyCount = Number(savedCount);
     }
 
-    statusText.textContent = studiedToday ? "Studied today ✅" : "Not studied yet";
-    countText.textContent = "Study count: " + studyCount;
-    button.textContent = studiedToday ? "Cancel" : "Start Study";
+    renderUI();
 
     button.addEventListener("click", () => {
       if (!studiedToday) {
         studiedToday = true;
-        studyCount = studyCount + 1;
-
-        statusText.textContent = "Studied today ✅";
-        countText.textContent = "Study count: " + studyCount;
-        button.textContent = "Cancel";
+        studyCount++;
       } else {
-      studiedToday = false;
-
-      statusText.textContent = "Not studied yet";
-      button.textContent = "Start Study";
+        studiedToday = false;
       }
 
       localStorage.setItem("studiedToday", studiedToday);
       localStorage.setItem("studyCount", studyCount);
+
+      renderUI();
       });
     </script>
   </body>
