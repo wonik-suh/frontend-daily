@@ -24,14 +24,18 @@
     let studiedToday = false;
     let studyCount = 0;
 
-    function renderUI() {
+    function renderStatus() {
       statusText.textContent = studiedToday
-        ? "Studied today ✅"
-        : "Not studied yet";
+      ? "Studied today ✅"
+      : "Not studied yet";
 
       countText.textContent = "Study count: " + studyCount;
+    }
+
+    function renderAction() {
       button.textContent = studiedToday ? "Cancel" : "Start Study";
     }
+
 
     const savedStudied = localStorage.getItem("studiedToday");
     const savedCount = localStorage.getItem("studyCount");
@@ -44,7 +48,11 @@
       studyCount = Number(savedCount);
     }
 
-    renderUI();
+    function renderUI() {
+      renderStatus();
+      renderAction();
+    }
+
 
     button.addEventListener("click", () => {
       if (!studiedToday) {
