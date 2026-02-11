@@ -10,6 +10,7 @@
 
     <p id="status">Not studied yet</p>
     <p id="count">Study count: 0</p>
+    <p id="time"></p>
 
     <button id="studyBtn">Start Study</button>
     
@@ -20,9 +21,11 @@
     const button = document.querySelector("#studyBtn");
     const statusText = document.querySelector("#status");
     const countText = document.querySelector("#count");
+    const timeText = document.querySelector("#time");
 
     let studiedToday = false;
     let studyCount = 0;
+    let lastStudiedAt = null;
 
     function renderStatus() {
       statusText.textContent = studiedToday
@@ -30,6 +33,9 @@
       : "Not studied yet";
 
       countText.textContent = "Study count: " + studyCount;
+      timeText.textContent = lastStudiedAt
+      ? "Last studied at: " + lastStudiedAt
+      : "";
     }
 
     function renderAction() {
@@ -67,6 +73,14 @@
 
       renderUI();
       });
+    
+      lastStudiedAt = new Date().toLocaleTimeString();
+      localStorage.setItem("lastStudiedAt", lastStudiedAt);
+      const savedTime = localStorage.getItem("lastStudiedAt");
+      if (savedTime !== null) {
+        lastStudiedAt = savedTime;
+      }
+
     </script>
   </body>
 </html>
