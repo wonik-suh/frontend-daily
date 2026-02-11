@@ -45,6 +45,11 @@
 
     const savedStudied = localStorage.getItem("studiedToday");
     const savedCount = localStorage.getItem("studyCount");
+    const savedTime = localStorage.getItem("lastStudiedAt");
+
+    if (savedTime !== null) {
+      lastStudiedAt = savedTime;
+    }
 
     if (savedStudied !== null) {
       studiedToday = savedStudied === "true";
@@ -58,12 +63,15 @@
       renderStatus();
       renderAction();
     }
+    renderUI();
 
 
     button.addEventListener("click", () => {
       if (!studiedToday) {
         studiedToday = true;
         studyCount++;
+        lastStudiedAt = new Date().toLocaleTimeString();
+        localStorage.setItem("lastStudiedAt", lastStudiedAt);
       } else {
         studiedToday = false;
       }
@@ -74,12 +82,6 @@
       renderUI();
       });
     
-      lastStudiedAt = new Date().toLocaleTimeString();
-      localStorage.setItem("lastStudiedAt", lastStudiedAt);
-      const savedTime = localStorage.getItem("lastStudiedAt");
-      if (savedTime !== null) {
-        lastStudiedAt = savedTime;
-      }
 
     </script>
   </body>
